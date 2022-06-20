@@ -1,0 +1,41 @@
+{% extends "template.html" %}
+
+{% block head_content %}
+    <div class="header">
+            <a class="header__button" href="{{ url_for('index') }}">Quiz App</a>
+    </div>
+{% endblock %}
+
+{% block main_content %}
+<form class="answer__form" method="post">
+<section class="question">
+    <p class="question__text">{{ quiz[0] }}</p>
+    <input id="true__answer" name="true__answer" value="{{ quiz[1] }}" type="hidden">
+</section>
+
+<section class="answer">
+        <textarea class="answer__input" name="answer__input" id="answer__input" cols="30" rows="4" autofocus placeholder="Type the answer..."></textarea>
+        <div class="answer__button" >
+            <button class="answer__button--button" type="submit">Submit</button>
+        </div>
+</section>
+<h6>* all answers written in lowercase</h6>
+<p>Total : {{ game_over }} / 5</p>
+<p>Jumlah Benar : {{ score_game }}</p>
+{% if final_score %}
+    <h3>Skor akhir kamu adalah: {{ last_score * 20 }} / 100</h3>
+{% endif %}
+</form>
+
+<section>
+    {% if user_answer == true_answer and user_answer != None and true_answer != None %}
+        <script>
+            alert("Jawaban anda benar!")
+        </script>
+        {% elif user_answer != true_answer and user_answer != None and true_answer != None %}
+        <script>
+            alert("Jawaban anda salah!")
+        </script>
+    {% endif %}
+</section>
+{% endblock %}
